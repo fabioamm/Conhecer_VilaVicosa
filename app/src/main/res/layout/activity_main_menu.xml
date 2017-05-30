@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.fbiomateus.conhecer_vilavicosa.MainMenu">
+
+    <Button
+        android:id="@+id/btnEntertainment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/ic_entertainment"
+        android:drawableRight="@drawable/ic_go"
+        android:padding="10dp"
+        android:text="@string/entretenimento"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccomodation" />
+
+    <Button
+        android:id="@+id/btnAccomodation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/ic_accomodation"
+        android:drawableRight="@drawable/ic_go"
+        android:padding="10dp"
+        android:text="@string/alojamento"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRestaurant" />
+
+    <Button
+        android:id="@+id/btnRestaurant"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/ic_restaurant"
+        android:drawableRight="@drawable/ic_go"
+        android:padding="10dp"
+        android:text="@string/restaura_o"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPatrimony" />
+
+    <Button
+        android:id="@+id/btnPatrimony"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/ic_patrimony"
+        android:drawableRight="@drawable/ic_go"
+        android:padding="10dp"
+        android:text="@string/monumentos"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
