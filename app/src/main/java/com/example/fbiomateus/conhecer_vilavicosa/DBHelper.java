@@ -2,10 +2,13 @@ package com.example.fbiomateus.conhecer_vilavicosa;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "CVV_DB";
@@ -29,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertPlace(String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl){
+    public void insertPlace(String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude){
         mSqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -40,10 +43,30 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("CLOSEHOUR", closeHour);
         values.put("CONTACT", contact);
         values.put("IMGURL", imgUrl);
+        values.put("latitude", longitude);
+        values.put("longitude", latitude);
 
         mSqLiteDatabase.insert(TABLE_NAME, null, values);
         mSqLiteDatabase.close();
     }
 
+    public ArrayList<Place> getAllPlaces(){
+        ArrayList<Place> places = new ArrayList<>();
 
+        mSqLiteDatabase = this.getReadableDatabase();
+
+        String select_all = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = mSqLiteDatabase.rawQuery(select_all, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Place place = new Place(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                        cursor.getString(7), cursor.getString(8), cursor.getString(9));
+                places.add(place);
+            } while(cursor.moveToNext());
+        }
+        mSqLiteDatabase.close();
+        return places;
+    }
 }

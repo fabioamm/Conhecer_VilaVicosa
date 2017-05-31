@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ReservedArea extends AppCompatActivity {
 
-    private EditText username;
-    private EditText password;
+    private EditText etUsername;
+    private EditText etPassword;
+    private TextView tu;
+    private TextView tp;
     private Button btnLogin;
 
     @Override
@@ -19,18 +22,27 @@ public class ReservedArea extends AppCompatActivity {
         setContentView(R.layout.activity_reserved_area);
         getSupportActionBar().setTitle("Área reservada");
 
-        username = (EditText) findViewById(R.id.txtName);
-        password = (EditText) findViewById(R.id.txtPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        findViews();
 
-        /*this.btnLogin.setOnClickListener(new View.OnClickListener() {
+        this.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((username.getText().toString() == "admin") & (password.getText().toString() == "admin")) {
+                if ((etUsername.getText().toString() == "admin") && (etPassword.getText().toString() == "admin")) {
                     Intent intent = new Intent(ReservedArea.this, AddPlace.class);
                     startActivity(intent);
+                } else {
+                    tu.setText("NAO DEU");
+                    //tp.setText(etPassword.getText());
                 }
             }
-        });*/
+        });
+    }
+
+    private void findViews() {
+        this.etUsername = (EditText) findViewById(R.id.etUsername);
+        this.etPassword = (EditText) findViewById(R.id.etPassword);
+        this.tu = (TextView) findViewById(R.id.textView);
+        this.tp = (TextView) findViewById(R.id.textView2);
+        this.btnLogin = (Button) findViewById(R.id.btnLogin);
     }
 }

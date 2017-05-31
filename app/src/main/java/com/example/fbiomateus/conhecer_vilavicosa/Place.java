@@ -5,7 +5,7 @@ package com.example.fbiomateus.conhecer_vilavicosa;
  */
 
 public class Place {
-    private String id;
+    private int id;
     private String type;
     private String name;
     private String description;
@@ -13,12 +13,43 @@ public class Place {
     private String closeHour;
     private String contact;
     private String imgUrl;
+    private String latitude;
+    private String longitude;
 
-    public String getId() {
+    public Place(int id, String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.contact = contact;
+        this.imgUrl = imgUrl;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
