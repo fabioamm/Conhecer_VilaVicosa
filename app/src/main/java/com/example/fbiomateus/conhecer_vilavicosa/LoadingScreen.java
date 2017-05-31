@@ -7,14 +7,11 @@ import android.os.Bundle;
 
 public class LoadingScreen extends AppCompatActivity {
 
-    private DatabaseAccess databaseAccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
-        this.databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-
         getSupportActionBar().hide(); //Remover barra de titulo
 
         Thread myThread = new Thread(){
@@ -22,7 +19,7 @@ public class LoadingScreen extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), TestDB.class);
+                    Intent intent = new Intent(getApplicationContext(), ReservedAreaMenu.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

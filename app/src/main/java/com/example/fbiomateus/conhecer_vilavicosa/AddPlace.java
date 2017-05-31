@@ -1,14 +1,16 @@
 package com.example.fbiomateus.conhecer_vilavicosa;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AddPlace extends AppCompatActivity {
-    private DatabaseAccess databaseAccess;
+    DBHelper dbHelper;
     private Place place;
     private EditText etType;
     private EditText etName;
@@ -24,14 +26,21 @@ public class AddPlace extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place);
-        findViews();
         getSupportActionBar().setTitle("Adicionar local");
+        findViews();
+
+        dbHelper = new DBHelper(this);
 
         this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (place == null)
-                    insertPlace();
+                dbHelper.insertPlace(sp1.getSelectedItem().toString(), etName.getText().toString(), etDescription.getText().toString(), etOpenHour.getText().toString(), etCloseHour.getText().toString(), etContact.getText().toString(), etImgUrl.getText().toString());
+                Context context = getApplicationContext();
+                CharSequence text = etName.getText().toString() + " adicionado!";
+
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                toast.show();
+
             }
         });
     }
@@ -45,22 +54,5 @@ public class AddPlace extends AppCompatActivity {
         this.etContact = (EditText) findViewById(R.id.etContact);
         this.etImgUrl = (EditText) findViewById(R.id.etImgUrl);
         this.btnAdd = (Button) findViewById(R.id.btnAdd);
-    }
-
-    private void insertPlace() {
-        databaseAccess.open();
-        Place newPlace = new Place();
-        newPlace.setId("100");
-        newPlace.setType(sp1.getSelectedItem().toString());
-        newPlace.setName(etName.getText().toString());
-        newPlace.setDescription(etDescription.getText().toString());
-        newPlace.setOpenHour(etOpenHour.getText().toString());
-        newPlace.setCloseHour(etCloseHour.getText().toString());
-        newPlace.setContact(etContact.getText().toString());
-        newPlace.setImgUrl(etImgUrl.getText().toString());
-
-        databaseAccess.insertPlace(newPlace);
-        databaseAccess.close();
-        this.finish();
     }
 }

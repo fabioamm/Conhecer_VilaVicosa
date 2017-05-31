@@ -19,7 +19,8 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".ReservedArea" />
         <activity android:name=".TestDB" />
-        <activity android:name=".AddPlace"></activity>
+        <activity android:name=".AddPlace" />
+        <activity android:name=".ReservedAreaMenu"></activity>
     </application>
 
 </manifest>
