@@ -19,6 +19,7 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".ReservedArea" />
         <activity android:name=".AddPlace" />
+        <activity android:name=".PointOfInterest"/>
         <activity android:name=".ReservedAreaMenu" />
         <activity android:name=".TestMaps"></activity>
     </application>
