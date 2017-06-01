@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Conhecer_VilaVicosa</string>
     <string name="monumentos">Monumentos</string>
-    <string name="restaura_o">Restauração</string>
+    <string name="restaurantes">Restaurantes</string>
     <string name="alojamento">Alojamento</string>
     <string name="entretenimento">Entretenimento</string>
     <string name="addPlace">Adicionar local</string>

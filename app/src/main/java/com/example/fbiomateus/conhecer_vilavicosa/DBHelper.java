@@ -95,4 +95,25 @@ public class DBHelper extends SQLiteOpenHelper {
         mSqLiteDatabase.close();
         return places;
     }
+
+    public ArrayList<Place> getPlacesbyName(String type){
+        ArrayList<Place> places = new ArrayList<>();
+
+        mSqLiteDatabase = this.getReadableDatabase();
+
+        String select_all = "SELECT * FROM " + TABLE_NAME + " WHERE type = '" + type + "'";
+        Cursor cursor = mSqLiteDatabase.rawQuery(select_all, null);
+
+        if(cursor.moveToFirst()){
+            do {
+                Place place = new Place(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6),
+                        cursor.getString(7), cursor.getString(8), cursor.getString(9));
+                places.add(place);
+            } while(cursor.moveToNext());
+        }
+        mSqLiteDatabase.close();
+        return places;
+    }
+
 }

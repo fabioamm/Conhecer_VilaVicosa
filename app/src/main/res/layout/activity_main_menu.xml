@@ -42,7 +42,7 @@
         android:drawableLeft="@drawable/ic_restaurant"
         android:drawableRight="@drawable/ic_go"
         android:padding="10dp"
-        android:text="@string/restaura_o"
+        android:text="@string/restaurantes"
         android:textSize="11sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPatrimony" />

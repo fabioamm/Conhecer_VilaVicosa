@@ -12,10 +12,5 @@ public class TestMaps extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_maps);
 
-        dbHelper = new DBHelper(this);
-
-        String name = dbHelper.getAllPlaces().get(0).getName();
-
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 }

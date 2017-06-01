@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,37 +15,60 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.fbiomateus.conhecer_vilavicosa.R.id.listPlaces;
 
 public class PointOfInterest extends AppCompatActivity {
 
-    private int idButton;
+    private String type;
     DBHelper dbHelper;
     private ListView listPlaces;
     ArrayList<Place> places = new ArrayList<>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_poi);
+        dbHelper = new DBHelper(this);
 
-        //Get buttons id
+        //Get buttons type
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            idButton = (Integer) bundle.get("id");
+            type = (String) bundle.get("type");
         }
-       // listPlaces();
+
+
+
+
+        listPlaces = (ListView) findViewById(R.id.listPoint);
+
+        listPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(PointOfInterest.this, EditPlace.class);
+                intent.putExtra("id", places.get(position).getId());
+                intent.putExtra("name", places.get(position).getName());
+                intent.putExtra("description", places.get(position).getDescription());
+                intent.putExtra("openHour", places.get(position).getOpenHour());
+                intent.putExtra("closeHour", places.get(position).getCloseHour());
+                intent.putExtra("contact", places.get(position).getContact());
+                intent.putExtra("imgUrl", places.get(position).getImgUrl());
+                intent.putExtra("latitude", places.get(position).getLatitude());
+                intent.putExtra("longitude", places.get(position).getLongitude());
+                startActivity(intent);
+            }
+        });
+       listPlaces(type);
     }
 
-  /*  @Override
+    @Override
     protected void onPostResume() {
         super.onPostResume();
-        listPlaces();
+        listPlaces(type);
     }
 
-    public void listPlaces(){
-        places = dbHelper.getAllPlaces();
+    public void listPlaces(String type){
+        places = dbHelper.getPlacesbyName(type);
         this.listPlaces = (ListView) findViewById(R.id.listPoint);
 
         PointOfInterest.PlaceAdapter adapter = new PointOfInterest.PlaceAdapter(getApplicationContext(), places);
@@ -71,5 +95,5 @@ public class PointOfInterest extends AppCompatActivity {
 
             return convertView;
         }
-    }*/
+    }
 }

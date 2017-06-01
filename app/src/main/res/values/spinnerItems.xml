@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnerItems">
-        <item>Monumento</item>
-        <item>Restaurante</item>
-        <item>Alojamento</item>
-        <item>Entretenimento</item>
+        <item>@string/monumentos</item>
+        <item>@string/restaurantes</item>
+        <item>@string/alojamento</item>
+        <item>@string/entretenimento</item>
     </string-array>
 </resources>

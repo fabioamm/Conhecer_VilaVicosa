@@ -27,7 +27,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PointOfInterest.class);
-                intent.putExtra("id",0);
+                intent.putExtra("type","Monumentos");
                 startActivity(intent);
             }
         });
@@ -36,7 +36,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),PointOfInterest.class);
-                intent.putExtra("id",1);
+                intent.putExtra("type","Restaurantes");
                 startActivity(intent);
             }
         });
@@ -45,7 +45,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),PointOfInterest.class);
-                intent.putExtra("id",2);
+                intent.putExtra("type","Alojamento");
                 startActivity(intent);
             }
         });
@@ -54,7 +54,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),PointOfInterest.class);
-                intent.putExtra("id",3);
+                intent.putExtra("type","Entretenimento");
                 startActivity(intent);
             }
         });
@@ -62,7 +62,6 @@ public class MainMenu extends AppCompatActivity {
 
 
     }
-
 
 
     //ola isto e o commit motherfuck!
