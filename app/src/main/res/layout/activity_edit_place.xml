@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fbiomateus.conhecer_vilavicosa.AddPlace">
+    tools:context="com.example.fbiomateus.conhecer_vilavicosa.EditPlace">
 
     <EditText
         android:id="@+id/etName"
@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Nome do local"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/sp1" />
 
     <EditText
@@ -34,49 +34,45 @@
 
     <EditText
         android:id="@+id/etOpenHour"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_width="368dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
         android:ems="10"
         android:hint="Hora abertura"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
     <EditText
         android:id="@+id/etCloseHour"
-        android:layout_width="175dp"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Hora fecho"
         android:inputType="textPersonName"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintLeft_toRightOf="@+id/etOpenHour"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOpenHour" />
 
     <EditText
         android:id="@+id/etLatitude"
-        android:layout_width="175dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Latitude"
         android:layout_marginTop="7dp"
         app:layout_constraintTop_toBottomOf="@+id/etImgUrl"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/etLongitude"
-        android:layout_width="175dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -96,12 +92,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Contacto"
         android:inputType="phone"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etOpenHour" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/etCloseHour" />
 
     <EditText
         android:id="@+id/etImgUrl"
@@ -120,10 +116,10 @@
         android:id="@+id/btnUpdate"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:text="Adicionar"
-        tools:layout_editor_absoluteX="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etLongitude" />
+        android:layout_marginTop="5dp"
+        android:text="Atualizar"
+        app:layout_constraintTop_toBottomOf="@+id/etLongitude"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Spinner
         android:id="@+id/sp1"
@@ -132,7 +128,21 @@
         android:entries="@array/spinnerItems"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnDelete" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:drawableLeft="@drawable/ic_delete"
+        android:padding="10dp"
+        android:text="@string/apagar_local"
+        android:textSize="11sp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp" />
-
 </android.support.constraint.ConstraintLayout>

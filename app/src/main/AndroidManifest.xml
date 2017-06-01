@@ -21,7 +21,8 @@
         <activity android:name=".AddPlace" />
         <activity android:name=".PointOfInterest"/>
         <activity android:name=".ReservedAreaMenu" />
-        <activity android:name=".TestMaps"></activity>
+        <activity android:name=".TestMaps" />
+        <activity android:name=".EditPlace"></activity>
     </application>
 
 </manifest>

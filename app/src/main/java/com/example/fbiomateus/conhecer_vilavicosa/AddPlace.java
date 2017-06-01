@@ -1,12 +1,9 @@
 package com.example.fbiomateus.conhecer_vilavicosa;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +59,6 @@ public class AddPlace extends AppCompatActivity {
         this.etImgUrl = (EditText) findViewById(R.id.etImgUrl);
         this.etLatitude = (EditText) findViewById(R.id.etLatitude);
         this.etLongitude = (EditText) findViewById(R.id.etLongitude);
-        this.btnAdd = (Button) findViewById(R.id.btnAdd);
+        this.btnAdd = (Button) findViewById(R.id.btnUpdate);
     }
 }

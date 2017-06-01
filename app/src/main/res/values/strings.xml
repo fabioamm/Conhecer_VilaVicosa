@@ -5,4 +5,5 @@
     <string name="alojamento">Alojamento</string>
     <string name="entretenimento">Entretenimento</string>
     <string name="addPlace">Adicionar local</string>
+    <string name="apagar_local">Apagar local</string>
 </resources>

@@ -50,6 +50,32 @@ public class DBHelper extends SQLiteOpenHelper {
         mSqLiteDatabase.close();
     }
 
+    public void updatePlace(String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude){
+        mSqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("TYPE", type);
+        values.put("NAME", name);
+        values.put("DESCRIPTION", description);
+        values.put("OPENHOUR", openHour);
+        values.put("CLOSEHOUR", closeHour);
+        values.put("CONTACT", contact);
+        values.put("IMGURL", imgUrl);
+        values.put("LATITUDE", longitude);
+        values.put("LONGITUDE", latitude);
+//String strSQL = "DELETE " + TABLE_NAME + " SET name = " +  WHERE columnId = "+ someValue;
+        //mSqLiteDatabase.execSQL();
+        mSqLiteDatabase.update(TABLE_NAME, values, "name = ?" + name, new String[]{name});
+        mSqLiteDatabase.close();
+    }
+
+    public void deletePlace(String name){
+        mSqLiteDatabase = this.getWritableDatabase();
+
+        mSqLiteDatabase.delete(TABLE_NAME,"name=?",new String[]{name});
+        mSqLiteDatabase.close();
+    }
+
     public ArrayList<Place> getAllPlaces(){
         ArrayList<Place> places = new ArrayList<>();
 

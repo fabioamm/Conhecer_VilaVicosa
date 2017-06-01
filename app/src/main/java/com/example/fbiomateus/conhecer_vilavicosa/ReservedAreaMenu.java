@@ -4,15 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,6 @@ public class ReservedAreaMenu extends AppCompatActivity {
 
     DBHelper dbHelper;
     private Button btnAdd;
-    private Button btnUpdate;
-    private Button btnDelete;
     private ListView listPlaces;
     ArrayList<Place> places = new ArrayList<>();
 
@@ -33,29 +29,30 @@ public class ReservedAreaMenu extends AppCompatActivity {
         getSupportActionBar().setTitle("Menu Administração");
         dbHelper = new DBHelper(this);
 
-        /*this.btnUpdate = (Button) findViewById(R.id.btnUpdate);
-
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "UPDATE", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });*/
-
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        this.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("UP", "btnUpdateeee");
-            }
-        });
-
-        btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnAdd = (Button) findViewById(R.id.btnUpdate);
         this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReservedAreaMenu.this, AddPlace.class);
+                startActivity(intent);
+            }
+        });
+
+        listPlaces = (ListView) findViewById(R.id.listPlaces);
+
+        this.listPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ReservedAreaMenu.this, EditPlace.class);
+                intent.putExtra("id", places.get(position).getId());
+                intent.putExtra("name", places.get(position).getName());
+                intent.putExtra("description", places.get(position).getDescription());
+                intent.putExtra("openHour", places.get(position).getOpenHour());
+                intent.putExtra("closeHour", places.get(position).getCloseHour());
+                intent.putExtra("contact", places.get(position).getContact());
+                intent.putExtra("imgUrl", places.get(position).getImgUrl());
+                intent.putExtra("latitude", places.get(position).getLatitude());
+                intent.putExtra("longitude", places.get(position).getLongitude());
                 startActivity(intent);
             }
         });
