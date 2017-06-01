@@ -21,8 +21,6 @@ public class ReservedAreaMenu extends AppCompatActivity {
 
     DBHelper dbHelper;
     private Button btnAdd;
-    private Button btnUpdate;
-    private Button btnDelete;
     private ListView listPlaces;
     ArrayList<Place> places = new ArrayList<>();
 
@@ -32,24 +30,6 @@ public class ReservedAreaMenu extends AppCompatActivity {
         setContentView(R.layout.activity_reserved_area_menu);
         getSupportActionBar().setTitle("Menu Administração");
         dbHelper = new DBHelper(this);
-
-        /*this.btnUpdate = (Button) findViewById(R.id.btnUpdate);
-
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "UPDATE", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });*/
-
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        this.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("UP", "btnUpdateeee");
-            }
-        });
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         this.btnAdd.setOnClickListener(new View.OnClickListener() {
