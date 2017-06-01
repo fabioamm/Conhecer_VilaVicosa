@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,9 +21,10 @@ public class ReservedAreaMenu extends AppCompatActivity {
 
     DBHelper dbHelper;
     private Button btnAdd;
+    private Button btnUpdate;
+    private Button btnDelete;
     private ListView listPlaces;
     ArrayList<Place> places = new ArrayList<>();
-    private Button btnUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +35,21 @@ public class ReservedAreaMenu extends AppCompatActivity {
 
         /*this.btnUpdate = (Button) findViewById(R.id.btnUpdate);
 
-        this.btnUpdate.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "UPDATE", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });*/
+
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        this.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("UP", "btnUpdateeee");
+            }
+        });
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         this.btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -80,19 +90,8 @@ public class ReservedAreaMenu extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.list_item_layout, parent, false);
             }
 
-           // ImageView icType = (ImageView) convertView.findViewById(R.id.icType);
             TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
             Place place = places.get(position);
-
-            /*if(place.getType() == "Patrimony") {
-                icType.setImageResource(R.drawable.ic_patrimony);
-            } else if (place.getType() == "Accomodation") {
-                icType.setImageResource(R.drawable.ic_accomodation);
-            } else if (place.getType() == "Restaurant") {
-                icType.setImageResource(R.drawable.ic_restaurant);
-            } else if (place.getType() == "Entertainment") {
-                icType.setImageResource(R.drawable.ic_entertainment);
-            }*/
 
             txtName.setText(place.getName());
 

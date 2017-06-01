@@ -86,7 +86,9 @@
         android:hint="Longitude"
         android:inputType="textPersonName"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etImgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/etImgUrl"
+        app:layout_constraintLeft_toRightOf="@+id/etLatitude"
+        android:layout_marginLeft="8dp" />
 
     <EditText
         android:id="@+id/etContact"

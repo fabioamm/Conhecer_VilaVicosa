@@ -7,13 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ReservedArea extends AppCompatActivity {
 
     private EditText etUsername;
     private EditText etPassword;
-    private TextView tu;
-    private TextView tp;
     private Button btnLogin;
 
     @Override
@@ -27,12 +26,15 @@ public class ReservedArea extends AppCompatActivity {
         this.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((etUsername.getText().toString() == "admin") && (etPassword.getText().toString() == "admin")) {
-                    Intent intent = new Intent(ReservedArea.this, AddPlace.class);
+                String uAdmin = etUsername.getText().toString();
+                String pAdmin = etPassword.getText().toString();
+
+                if (uAdmin.equals("admin") && (pAdmin.equals("admin"))) {
+                    Intent intent = new Intent(ReservedArea.this, ReservedAreaMenu.class);
                     startActivity(intent);
                 } else {
-                    tu.setText("NAO DEU");
-                    //tp.setText(etPassword.getText());
+                    Toast toast = Toast.makeText(getApplicationContext(), "Insira credencias válidas", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
@@ -41,8 +43,6 @@ public class ReservedArea extends AppCompatActivity {
     private void findViews() {
         this.etUsername = (EditText) findViewById(R.id.etUsername);
         this.etPassword = (EditText) findViewById(R.id.etPassword);
-        this.tu = (TextView) findViewById(R.id.textView);
-        this.tp = (TextView) findViewById(R.id.textView2);
         this.btnLogin = (Button) findViewById(R.id.btnLogin);
     }
 }

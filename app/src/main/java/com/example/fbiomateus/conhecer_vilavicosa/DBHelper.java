@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create_table = "CREATE TABLE PLACE(ID INTEGER PRIMARY KEY, TYPE TEXT, NAME TEXT, DESCRIPTION TEXT, " +
-                "OPENHOUR TEXT, CLOSEHOUR TEXT, CONTACT TEXT, IMGURL TEXT);";
+                "OPENHOUR TEXT, CLOSEHOUR TEXT, CONTACT TEXT, IMGURL TEXT, LATITUDE TEXT, LONGITUDE TEXT);";
         db.execSQL(create_table);
     }
 
@@ -43,8 +43,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("CLOSEHOUR", closeHour);
         values.put("CONTACT", contact);
         values.put("IMGURL", imgUrl);
-        values.put("latitude", longitude);
-        values.put("longitude", latitude);
+        values.put("LATITUDE", longitude);
+        values.put("LONGITUDE", latitude);
 
         mSqLiteDatabase.insert(TABLE_NAME, null, values);
         mSqLiteDatabase.close();

@@ -16,6 +16,10 @@ public class MainMenu extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Menu inicial");
     }
+    private void onLeftSwipe() {
+        Intent intent = new Intent(getApplicationContext(), ReservedArea.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -37,13 +38,16 @@ public class AddPlace extends AppCompatActivity {
         this.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHelper.insertPlace(sp1.getSelectedItem().toString(), etName.getText().toString(), etDescription.getText().toString(), etOpenHour.getText().toString(), etCloseHour.getText().toString(), etContact.getText().toString(), etImgUrl.getText().toString(), etLatitude.getText().toString(), etLongitude.getText().toString());
-                Context context = getApplicationContext();
-                CharSequence text = etName.getText().toString() + " adicionado!";
+                try {
+                    dbHelper.insertPlace(sp1.getSelectedItem().toString(), etName.getText().toString(), etDescription.getText().toString(), etOpenHour.getText().toString(), etCloseHour.getText().toString(), etContact.getText().toString(), etImgUrl.getText().toString(), etLatitude.getText().toString(), etLongitude.getText().toString());
+                    Context context = getApplicationContext();
+                    CharSequence text = etName.getText().toString() + " adicionado!";
 
-                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-                toast.show();
-
+                    Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                } catch(Exception e) {
+                    Log.d("ERROR", e.toString());
+                }
             }
         });
     }
@@ -60,35 +64,4 @@ public class AddPlace extends AppCompatActivity {
         this.etLongitude = (EditText) findViewById(R.id.etLongitude);
         this.btnAdd = (Button) findViewById(R.id.btnAdd);
     }
-
-    /*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //Handle the back button
-        if(keyCode == KeyEvent.KEYCODE_BACK) {
-            //Ask the user if they want to quit
-            new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle("quit")
-                    .setMessage("rly quit")
-                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            //Stop the activity
-                            AddPlace.this.finish();
-                        }
-
-                    })
-                    .setNegativeButton("no", null)
-                    .show();
-
-            return true;
-        }
-        else {
-            return super.onKeyDown(keyCode, event);
-        }
-
-    }*/
 }
