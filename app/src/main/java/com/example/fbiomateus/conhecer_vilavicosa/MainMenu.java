@@ -18,8 +18,7 @@ public class MainMenu extends AppCompatActivity {
 
 
     }
-
-
+    //ola isto e o commit motherfuck!
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);
