@@ -15,12 +15,10 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         getSupportActionBar().setTitle("Menu inicial");
-    }
-    private void onLeftSwipe() {
-        Intent intent = new Intent(getApplicationContext(), ReservedArea.class);
-        startActivity(intent);
-    }
 
+
+    }
+    //ola isto e o commit motherfuck!
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);
