@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
         mSqLiteDatabase.close();
     }
 
-    public void updatePlace(String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude){
+    public void updatePlace(int id, String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude){
         mSqLiteDatabase = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -63,16 +63,15 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("IMGURL", imgUrl);
         values.put("LATITUDE", longitude);
         values.put("LONGITUDE", latitude);
-//String strSQL = "DELETE " + TABLE_NAME + " SET name = " +  WHERE columnId = "+ someValue;
-        //mSqLiteDatabase.execSQL();
-        mSqLiteDatabase.update(TABLE_NAME, values, "name = ?" + name, new String[]{name});
+
+        mSqLiteDatabase.update(TABLE_NAME, values, "id = " + id, null);
         mSqLiteDatabase.close();
     }
 
-    public void deletePlace(String name){
+    public void deletePlace(int id){
         mSqLiteDatabase = this.getWritableDatabase();
 
-        mSqLiteDatabase.delete(TABLE_NAME,"name=?",new String[]{name});
+        mSqLiteDatabase.delete(TABLE_NAME,"id = " + id, null);
         mSqLiteDatabase.close();
     }
 

@@ -16,6 +16,7 @@ public class EditPlace extends AppCompatActivity {
 
     DBHelper dbHelper;
     private Spinner sp1;
+    private int id;
     private EditText etName;
     private EditText etDescription;
     private EditText etOpenHour;
@@ -36,6 +37,7 @@ public class EditPlace extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         Intent intent = getIntent();
+        id = intent.getExtras().getInt("id");
         etName.setText(intent.getStringExtra("name"));
         etDescription.setText(intent.getStringExtra("description"));
         etOpenHour.setText(intent.getStringExtra("openHour"));
@@ -49,12 +51,15 @@ public class EditPlace extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    dbHelper.updatePlace(sp1.getSelectedItem().toString(), etName.getText().toString(), etDescription.getText().toString(), etOpenHour.getText().toString(), etCloseHour.getText().toString(), etContact.getText().toString(), etImgUrl.getText().toString(), etLatitude.getText().toString(), etLongitude.getText().toString());
+                    dbHelper.updatePlace(id, sp1.getSelectedItem().toString(), etName.getText().toString(), etDescription.getText().toString(), etOpenHour.getText().toString(), etCloseHour.getText().toString(), etContact.getText().toString(), etImgUrl.getText().toString(), etLatitude.getText().toString(), etLongitude.getText().toString());
                     Context context = getApplicationContext();
                     CharSequence text = etName.getText().toString() + " atualizado!";
 
                     Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                     toast.show();
+
+                    Intent intent = new Intent(EditPlace.this, ReservedAreaMenu.class);
+                    startActivity(intent);
                 } catch(Exception e) {
                     Log.d("ERROR", e.toString());
                 }
@@ -65,12 +70,15 @@ public class EditPlace extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    dbHelper.deletePlace(etName.getText().toString());
+                    dbHelper.deletePlace(id);
                     Context context = getApplicationContext();
                     CharSequence text = etName.getText().toString() + " removido!";
 
                     Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                     toast.show();
+
+                    Intent intent = new Intent(EditPlace.this, ReservedAreaMenu.class);
+                    startActivity(intent);
                 } catch(Exception e) {
                     Log.d("ERROR", e.toString());
                 }
@@ -90,5 +98,5 @@ public class EditPlace extends AppCompatActivity {
         this.etLongitude = (EditText) findViewById(R.id.etLongitude);
         this.btnUpdate = (Button) findViewById(R.id.btnUpdate);
         this.btnDelete = (Button) findViewById(R.id.btnDelete);
-}
+    }
 }

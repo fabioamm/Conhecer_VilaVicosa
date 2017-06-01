@@ -1,6 +1,7 @@
 package com.example.fbiomateus.conhecer_vilavicosa;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,9 @@ public class AddPlace extends AppCompatActivity {
 
                     Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
                     toast.show();
+
+                    Intent intent = new Intent(AddPlace.this, ReservedAreaMenu.class);
+                    startActivity(intent);
                 } catch(Exception e) {
                     Log.d("ERROR", e.toString());
                 }

@@ -23,8 +23,6 @@ public class PointOfInterest extends AppCompatActivity {
     private ListView listPlaces;
     ArrayList<Place> places = new ArrayList<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +35,12 @@ public class PointOfInterest extends AppCompatActivity {
             type = (String) bundle.get("type");
         }
 
-
-
-
         listPlaces = (ListView) findViewById(R.id.listPoint);
 
         listPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PointOfInterest.this, EditPlace.class);
+                Intent intent = new Intent(PointOfInterest.this, Description.class);
                 intent.putExtra("id", places.get(position).getId());
                 intent.putExtra("name", places.get(position).getName());
                 intent.putExtra("description", places.get(position).getDescription());
