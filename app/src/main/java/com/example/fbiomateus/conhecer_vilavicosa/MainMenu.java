@@ -61,6 +61,7 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);

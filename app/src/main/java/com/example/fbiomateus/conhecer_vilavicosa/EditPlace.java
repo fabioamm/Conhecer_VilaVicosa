@@ -1,7 +1,9 @@
 package com.example.fbiomateus.conhecer_vilavicosa;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +49,37 @@ public class EditPlace extends AppCompatActivity {
         etLatitude.setText(intent.getStringExtra("latitude"));
         etLongitude.setText(intent.getStringExtra("longitude"));
 
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Apagar local");
+        builder.setMessage("Tem a certeza que pretende eliminar o local ?");
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                dbHelper.deletePlace(id);
+
+                Context context = getApplicationContext();
+                CharSequence text = etName.getText().toString() + " removido!";
+
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                toast.show();
+
+                Intent intent = new Intent(EditPlace.this, ReservedAreaMenu.class);
+                startActivity(intent);
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
         this.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,15 +103,8 @@ public class EditPlace extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    dbHelper.deletePlace(id);
-                    Context context = getApplicationContext();
-                    CharSequence text = etName.getText().toString() + " removido!";
-
-                    Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-                    toast.show();
-
-                    Intent intent = new Intent(EditPlace.this, ReservedAreaMenu.class);
-                    startActivity(intent);
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 } catch(Exception e) {
                     Log.d("ERROR", e.toString());
                 }
