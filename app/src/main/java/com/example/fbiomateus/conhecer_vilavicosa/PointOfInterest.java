@@ -63,7 +63,7 @@ public class PointOfInterest extends AppCompatActivity {
     }
 
     public void listPlaces(String type){
-        places = dbHelper.getPlacesbyName(type);
+        places = dbHelper.getPlacesbyType(type);
         this.listPlaces = (ListView) findViewById(R.id.listPoint);
 
         PointOfInterest.PlaceAdapter adapter = new PointOfInterest.PlaceAdapter(getApplicationContext(), places);
