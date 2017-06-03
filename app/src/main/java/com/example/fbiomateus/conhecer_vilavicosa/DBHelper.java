@@ -43,8 +43,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("CLOSEHOUR", closeHour);
         values.put("CONTACT", contact);
         values.put("IMGURL", imgUrl);
-        values.put("LATITUDE", longitude);
-        values.put("LONGITUDE", latitude);
+        values.put("LATITUDE", latitude);
+        values.put("LONGITUDE", longitude);
 
         mSqLiteDatabase.insert(TABLE_NAME, null, values);
         mSqLiteDatabase.close();

@@ -18,7 +18,6 @@ public class LoadingScreen extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-
         Thread myThread = new Thread(){
             @Override
             public void run() {

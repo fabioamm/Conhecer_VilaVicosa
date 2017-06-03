@@ -96,8 +96,6 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         });
     }
 
-
-
     private void findViews() {
         this.btnDirection = (Button) findViewById(R.id.btnDirection);
         this.txtName = (TextView) findViewById(R.id.txtName);
