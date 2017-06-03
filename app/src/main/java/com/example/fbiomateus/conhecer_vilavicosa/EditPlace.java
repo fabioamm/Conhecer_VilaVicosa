@@ -19,16 +19,8 @@ public class EditPlace extends AppCompatActivity {
     DBHelper dbHelper;
     private Spinner sp1;
     private int id;
-    private EditText etName;
-    private EditText etDescription;
-    private EditText etOpenHour;
-    private EditText etCloseHour;
-    private EditText etContact;
-    private EditText etImgUrl;
-    private EditText etLatitude;
-    private EditText etLongitude;
-    private Button btnUpdate;
-    private Button btnDelete;
+    private EditText etName,etDescription,etOpenHour,etCloseHour,etContact,etImgUrl,etLatitude,etLongitude;
+    private Button btnUpdate,btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,8 +11,7 @@ import android.widget.Toast;
 
 public class ReservedArea extends AppCompatActivity {
 
-    private EditText etUsername;
-    private EditText etPassword;
+    private EditText etUsername,etPassword;
     private Button btnLogin;
 
     @Override

@@ -6,15 +6,8 @@ package com.example.fbiomateus.conhecer_vilavicosa;
 
 public class Place {
     private int id;
-    private String type;
-    private String name;
-    private String description;
-    private String openHour;
-    private String closeHour;
-    private String contact;
-    private String imgUrl;
-    private String latitude;
-    private String longitude;
+    private String type,name,description,openHour,closeHour,contact,imgUrl,latitude,longitude;
+
 
     public Place(int id, String type, String name, String description, String openHour, String closeHour, String contact, String imgUrl, String latitude, String longitude) {
         this.id = id;

@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.PolyUtil;
 import com.google.maps.android.SphericalUtil;
 import com.squareup.picasso.Picasso;
 
@@ -85,6 +86,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
             public void onClick(View v) {
                 String destinationLatitude = intent.getStringExtra("latitude");
                 String destinationLongitude = intent.getStringExtra("longitude");
+
 
                 Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:"+destinationLatitude+","+destinationLongitude));
                 i.setClassName("com.google.android.apps.maps",

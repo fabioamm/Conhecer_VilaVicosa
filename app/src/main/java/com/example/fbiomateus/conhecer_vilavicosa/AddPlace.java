@@ -13,14 +13,7 @@ import android.widget.Toast;
 
 public class AddPlace extends AppCompatActivity {
     DBHelper dbHelper;
-    private EditText etName;
-    private EditText etDescription;
-    private EditText etOpenHour;
-    private EditText etCloseHour;
-    private EditText etContact;
-    private EditText etImgUrl;
-    private EditText etLatitude;
-    private EditText etLongitude;
+    private EditText etName, etDescription,etOpenHour,etCloseHour,etContact,etImgUrl,etLatitude,etLongitude ;
     private Button btnAdd;
     private Spinner sp1;
 
