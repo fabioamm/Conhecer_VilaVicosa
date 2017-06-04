@@ -39,10 +39,9 @@
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="fill_parent"
-        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="49dp"
         android:text="Descrição"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDirection" />
@@ -50,9 +49,8 @@
     <TextView
         android:id="@+id/lblHours"
         android:layout_width="fill_parent"
-        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:text="Horário"
         android:textStyle="bold"
@@ -63,7 +61,6 @@
     <TextView
         android:id="@+id/txtHours"
         android:layout_width="fill_parent"
-        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -73,10 +70,9 @@
     <TextView
         android:id="@+id/lblContact"
         android:layout_width="fill_parent"
-        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:text="Contacto"
         android:textStyle="bold"
         android:textSize="15sp"
@@ -86,12 +82,21 @@
     <TextView
         android:id="@+id/txtContact"
         android:layout_width="fill_parent"
-        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblContact" />
+
+    <TextView
+        android:id="@+id/txtDistance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:textStyle="bold"
+        android:text="Ative a localização"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescription"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

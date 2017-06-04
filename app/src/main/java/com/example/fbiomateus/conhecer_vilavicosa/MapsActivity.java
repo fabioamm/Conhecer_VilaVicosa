@@ -11,9 +11,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    ArrayList markerPoints = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(local));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
 
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (markerPoints.size() > 1) {
+                    markerPoints.clear();
+                    mMap.clear();
+                }
+
+
+            }
+        });
     }
+
 
 
 }

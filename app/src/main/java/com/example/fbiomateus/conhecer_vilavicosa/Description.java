@@ -4,10 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.icu.text.DecimalFormat;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -95,13 +98,13 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         this.txtHours = (TextView) findViewById(R.id.txtHours);
         this.txtContact = (TextView) findViewById(R.id.txtContact);
         //this.imgPlace = (ImageView) findViewById(R.id.imgPlace);
-        //this.txtDistance = (TextView)findViewById(R.id.txtDistance);
+        this.txtDistance = (TextView)findViewById(R.id.txtDistance);
     }
 
     @Override
     public void onConnected(Bundle ConnectionHint) {
-        //getLocation();
-        //compareLocation();
+        getLocation();
+        compareLocation();
     }
 
     protected void getLocation(){
@@ -128,18 +131,21 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         if (mLastLocation != null) {
         }
         else{
-           Log.d("Conhecer VV","Localizaçao FUck");
+           Log.d("Conhecer VV","Localizaçao not working");
         }
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected void compareLocation(){
         if (mLastLocation == null){
             Log.d("Conhecer Vila Viçosa", "currentLocation == null");
         }else{
             LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
-            txtDistance.setText(String.valueOf(dist));
+            dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
+            dist = dist/1000;
+            dist = Double.parseDouble(new DecimalFormat("###.##").format(dist));
+            txtDistance.setText(String.valueOf("Encontra-se a "+ dist +" KM"));
         }
     }
 
