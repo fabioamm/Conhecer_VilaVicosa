@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,57 +9,62 @@
 
     <Button
         android:id="@+id/btnEntertainment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:text="@string/entretenimento"
         android:drawableLeft="@drawable/ic_entertainment"
         android:drawableRight="@drawable/ic_go"
         android:padding="10dp"
-        android:text="@string/entretenimento"
+        android:textColor="#000000"
         android:textSize="11sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccomodation" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAccomodation"
+        android:shadowRadius="0" />
 
     <Button
         android:id="@+id/btnAccomodation"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="0dp"
         android:drawableLeft="@drawable/ic_accomodation"
         android:drawableRight="@drawable/ic_go"
-        android:padding="10dp"
         android:text="@string/alojamento"
+        android:padding="10dp"
+        android:textColor="#000000"
         android:textSize="11sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRestaurant" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRestaurant"
+        android:shadowRadius="0" />
 
     <Button
         android:id="@+id/btnRestaurant"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="0dp"
         android:drawableLeft="@drawable/ic_restaurant"
         android:drawableRight="@drawable/ic_go"
-        android:padding="10dp"
         android:text="@string/restaurantes"
+        android:padding="10dp"
+        android:textColor="#000000"
         android:textSize="11sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPatrimony" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPatrimony"
+        android:shadowRadius="0" />
 
     <Button
         android:id="@+id/btnPatrimony"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="0dp"
         android:drawableLeft="@drawable/ic_patrimony"
         android:drawableRight="@drawable/ic_go"
-        android:padding="10dp"
         android:text="@string/monumentos"
+        android:padding="10dp"
+        android:textColor="#000000"
         android:textSize="11sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:shadowRadius="0" />
 
 </android.support.constraint.ConstraintLayout>

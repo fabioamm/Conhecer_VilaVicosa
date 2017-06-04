@@ -36,6 +36,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -45,6 +46,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
     private Button btnDirection;
     private TextView txtName, txtDescription,txtHours,txtContact,txtDistance;
     private ImageView imgPlace;
+    private Bitmap bitmap;
     private GoogleApiClient mGoogleApiClient;
     public Location mLastLocation;
     private final int MY_PERMISSION_REQUEST_ID = 1234;
@@ -55,8 +57,11 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_description);
+
+
+        Intent intent = getIntent();
+        getSupportActionBar().setTitle(intent.getStringExtra("name"));
         findViews();
 
         if (mGoogleApiClient == null) {
@@ -67,9 +72,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
                     .build();
         }
 
-        final Intent intent = getIntent();
-        getSupportActionBar().setTitle(intent.getStringExtra("name"));
-        txtName.setText(intent.getStringExtra("name"));
+        btnDirection.setText(intent.getStringExtra("name"));
         txtDescription.setText(intent.getStringExtra("description"));
         txtHours.setText(intent.getStringExtra("openHour") + " - " + intent.getStringExtra("closeHour"));
         txtContact.setText(intent.getStringExtra("contact"));
@@ -79,11 +82,10 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         pointLatLng = new LatLng(lat,lng);
 
 
-        new DownLoadImageTask(imgPlace).execute(intent.getStringExtra("imgUrl"));
-
         this.btnDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = getIntent();
                 String destinationLatitude = intent.getStringExtra("latitude");
                 String destinationLongitude = intent.getStringExtra("longitude");
 
@@ -103,7 +105,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         this.txtHours = (TextView) findViewById(R.id.txtHours);
         this.txtContact = (TextView) findViewById(R.id.txtContact);
         this.imgPlace = (ImageView) findViewById(R.id.imgPlace);
-        txtDistance = (TextView)findViewById(R.id.txtDistance);
+        //this.txtDistance = (TextView)findViewById(R.id.txtDistance);
     }
 
     @Override
@@ -141,19 +143,15 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
 
     }
 
-        protected void compareLocation(){
-            if (mLastLocation == null){
-                Log.d("Conhecer Vila Viçosa", "currentLocation == null");
-            }else{
-                LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-                dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
-                txtDistance.setText(String.valueOf(dist));
-
-            }
-
-
+    protected void compareLocation(){
+        if (mLastLocation == null){
+            Log.d("Conhecer Vila Viçosa", "currentLocation == null");
+        }else{
+            LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+            dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
+            txtDistance.setText(String.valueOf(dist));
         }
-
+    }
 
     @Override
     protected void onStart() {
@@ -182,39 +180,4 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
 
     }
 
-    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
-        ImageView imageView;
-
-        public DownLoadImageTask(ImageView imageView){
-            this.imageView = imageView;
-        }
-
-        /*
-            doInBackground(Params... params)
-                Override this method to perform a computation on a background thread.
-         */
-        protected Bitmap doInBackground(String...urls){
-            String urlOfImage = urls[0];
-            Bitmap logo = null;
-            try{
-                InputStream is = new URL(urlOfImage).openStream();
-                /*
-                    decodeStream(InputStream is)
-                        Decode an input stream into a bitmap.
-                 */
-                logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){ // Catch the download exception
-                e.printStackTrace();
-            }
-            return logo;
-        }
-
-        /*
-            onPostExecute(Result result)
-                Runs on the UI thread after doInBackground(Params...).
-         */
-        protected void onPostExecute(Bitmap result){
-            imageView.setImageBitmap(result);
-        }
-    }
 }

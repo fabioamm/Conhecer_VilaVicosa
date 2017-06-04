@@ -2,8 +2,10 @@
     <string name="app_name">Conhecer Vila Vicosa</string>
     <string name="monumentos">Monumentos</string>
     <string name="restaurantes">Restaurantes</string>
-    <string name="alojamento">Alojamento</string>
+    <string name="alojamento">Alojamentos</string>
     <string name="entretenimento">Entretenimento</string>
     <string name="addPlace">Adicionar local</string>
     <string name="apagar_local">Apagar local</string>
+    <string name="rea_reservada">reservedArea</string>
+    <string name="nome_do_local">Nome do local</string>
 </resources>

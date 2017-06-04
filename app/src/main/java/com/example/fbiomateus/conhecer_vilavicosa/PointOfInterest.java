@@ -29,11 +29,13 @@ public class PointOfInterest extends AppCompatActivity {
         setContentView(R.layout.activity_show_poi);
         dbHelper = new DBHelper(this);
 
+
         //Get buttons type
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             type = (String) bundle.get("type");
         }
+        getSupportActionBar().setTitle(type);
 
         listPlaces = (ListView) findViewById(R.id.listPoint);
 
