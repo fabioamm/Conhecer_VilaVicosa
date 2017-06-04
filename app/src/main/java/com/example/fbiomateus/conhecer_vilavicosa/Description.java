@@ -22,7 +22,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.SphericalUtil;
+//import com.google.maps.android.SphericalUtil;
 import com.squareup.picasso.Picasso;
 
 public class Description extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,LocationListener {
@@ -78,9 +78,9 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
                 String destinationLongitude = intent.getStringExtra("longitude");
 
 
-                Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:"+destinationLatitude+","+destinationLongitude));
-                i.setClassName("com.google.android.apps.maps",
-                        "com.google.android.maps.MapsActivity");
+                Intent i = new Intent(getApplicationContext(),MapsActivity.class);
+                i.putExtra("latitude",destinationLatitude);
+                i.putExtra("longitude",destinationLongitude);
                 startActivity(i);
             }
         });
@@ -98,8 +98,8 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
 
     @Override
     public void onConnected(Bundle ConnectionHint) {
-        getLocation();
-        compareLocation();
+        //getLocation();
+        //compareLocation();
     }
 
     protected void getLocation(){
@@ -136,7 +136,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
             Log.d("Conhecer Vila Viçosa", "currentLocation == null");
         }else{
             LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
+            //dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
             txtDistance.setText(String.valueOf(dist));
         }
     }
