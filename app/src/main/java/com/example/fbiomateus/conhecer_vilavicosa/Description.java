@@ -1,18 +1,11 @@
 package com.example.fbiomateus.conhecer_vilavicosa;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.icu.text.DecimalFormat;
+import android.content.IntentSender;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,26 +16,27 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-//
-import com.google.maps.android.SphericalUtil;
 import com.squareup.picasso.Picasso;
 
-public class Description extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,LocationListener {
+import java.text.DecimalFormat;
 
-    private MapsActivity map;
+//
+
+public class Description extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+
     private Button btnDirection;
-    private TextView txtName, txtDescription,txtHours,txtContact,txtDistance;
-   // private ImageView imgPlace;
-    private Bitmap bitmap;
+    private TextView txtDescription, txtHours, txtContact, txtDistance;
+    private Intent intent;
+    private String latitude;
+    private String longitude;
+
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private GoogleApiClient mGoogleApiClient;
-    public Location mLastLocation;
-    private final int MY_PERMISSION_REQUEST_ID = 1234;
-    private final int MY_PERMISSION_REQUEST_ID_0 = 1234;
-    private double dist, lat, lng;
-    private LatLng pointLatLng;
+    private LocationRequest mLocationRequest;
+    private double myLat;
+    private double myLong;
 
 
     @Override
@@ -50,115 +44,117 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         getSupportActionBar().setTitle(intent.getStringExtra("name"));
         findViews();
 
-        ImageView imgPlace = (ImageView) findViewById(R.id.imgPlace);
-        Picasso.with(getApplicationContext()).load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Small-world-network-example.png/220px-Small-world-network-example.png").into(imgPlace);
+        final ImageView imgPlace = (ImageView) findViewById(R.id.imgPlace);
+        Picasso.with(getApplicationContext()).load(intent.getStringExtra("imgUrl")).into(imgPlace);
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
+
+        latitude = intent.getStringExtra("latitude");
+        longitude = intent.getStringExtra("longitude");
+
+        double lat = Double.parseDouble(latitude);
+        double lng = Double.parseDouble(longitude);
+
+
+
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)
+                .setFastestInterval(1 * 1000);
+
+
+
+
+        Log.d("LATITUDEEEE", String.valueOf(myLat));
+        Log.d("LONGITUDEEEE", String.valueOf(myLong));
+
+        DecimalFormat df = new DecimalFormat("0.##");
+        txtDistance.setText(String.valueOf(df.format(distanceBetween(myLat, myLong, lat, lng, "K"))) + " km");
 
         btnDirection.setText(intent.getStringExtra("name"));
         txtDescription.setText(intent.getStringExtra("description"));
         txtHours.setText(intent.getStringExtra("openHour") + " - " + intent.getStringExtra("closeHour"));
         txtContact.setText(intent.getStringExtra("contact"));
-        lat = Double.valueOf(intent.getStringExtra("latitude"));
-        lng = Double.valueOf(intent.getStringExtra("longitude"));
-
-        pointLatLng = new LatLng(lat,lng);
 
 
         this.btnDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                String destinationLatitude = intent.getStringExtra("latitude");
-                String destinationLongitude = intent.getStringExtra("longitude");
-
-
-                Intent i = new Intent(getApplicationContext(),MapsActivity.class);
-                i.putExtra("latitude",destinationLatitude);
-                i.putExtra("longitude",destinationLongitude);
-                startActivity(i);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("geo:" + latitude + "," + longitude + "?q=" + latitude + "," + longitude + " (" + btnDirection.getText() + ")"));
+                startActivity(intent);
             }
         });
     }
 
+    public double distanceBetween(double startLatitude, double startLongitude, double endLatitude, double endLongitude, String unit) {
+        double theta = startLongitude - endLongitude;
+        double dist = Math.sin(deg2rad(startLatitude)) * Math.sin(deg2rad(endLatitude)) + Math.cos(deg2rad(startLatitude)) * Math.cos(deg2rad(endLatitude)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        if (unit == "K") {
+            dist = dist * 1.609344;
+        } else if (unit == "M") {
+            dist = dist * 0.8684;
+        }
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
+
     private void findViews() {
         this.btnDirection = (Button) findViewById(R.id.btnDirection);
-        this.txtName = (TextView) findViewById(R.id.txtName);
         this.txtDescription = (TextView) findViewById(R.id.txtDescription);
         this.txtHours = (TextView) findViewById(R.id.txtHours);
         this.txtContact = (TextView) findViewById(R.id.txtContact);
-        //this.imgPlace = (ImageView) findViewById(R.id.imgPlace);
-        this.txtDistance = (TextView)findViewById(R.id.txtDistance);
+        this.txtDistance = (TextView) findViewById(R.id.txtDistance);
     }
 
     @Override
-    public void onConnected(Bundle ConnectionHint) {
-        getLocation();
-        compareLocation();
-    }
-
-    protected void getLocation(){
-        //check permission to acess location
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        //if not allowed, get it
-        if (permissionCheck == PackageManager.PERMISSION_DENIED){
-            //ask for permission
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSION_REQUEST_ID);
-            return;
-        }
-
-        //check permission to acess location
-        int permissionCheck1 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        //if not allowed, get it
-        if (permissionCheck1 == PackageManager.PERMISSION_DENIED){
-            //ask for permission
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},MY_PERMISSION_REQUEST_ID_0);
-            return;
-        }
-
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-        }
-        else{
-           Log.d("Conhecer VV","Localizaçao not working");
-        }
-
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    protected void compareLocation(){
-        if (mLastLocation == null){
-            Log.d("Conhecer Vila Viçosa", "currentLocation == null");
-        }else{
-            LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
-            dist = dist/1000;
-            dist = Double.parseDouble(new DecimalFormat("###.##").format(dist));
-            txtDistance.setText(String.valueOf("Encontra-se a "+ dist +" KM"));
-        }
-    }
-
-    @Override
-    protected void onStart() {
+    protected void onResume(){
+        super.onResume();
         mGoogleApiClient.connect();
-        super.onStart();
     }
 
     @Override
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
+        Log.v(this.getClass().getSimpleName(), "onPause()");
+
+        if(mGoogleApiClient.isConnected()){
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        if(location == null){
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        } else {
+            myLat = location.getLatitude();
+            myLong = location.getLongitude();
+        }
     }
 
     @Override
@@ -168,12 +164,20 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        if(connectionResult.hasResolution()){
+            try {
+                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e ){
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("Error", "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
     }
 
     @Override
     public void onLocationChanged(Location location) {
-
+        myLat = location.getLatitude();
+        myLong = location.getLongitude();
     }
-
 }

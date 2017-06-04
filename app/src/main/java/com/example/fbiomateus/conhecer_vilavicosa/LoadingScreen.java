@@ -56,12 +56,12 @@ public class LoadingScreen extends AppCompatActivity {
                         dbHelper.insertPlace("Monumentos", "Castelo de Vila Viçosa", "O castelo medieval apresenta planta quadrada, com muralhas de cerca de sessenta metros de lado, reforçadas, nos ângulos Oeste e Leste, por grandes torreões de planta circular. A sua face Noroeste e parte da Nordeste eram comuns à cerca da vila. Em seu interior ergueu-se a igreja matriz, sede da primeira paróquia da vila, e que hoje é o importante Santuário de Nossa Senhora da Conceição de Vila Viçosa, proclamada padroeira de Portugal em 1646.",
                                 " "," "," "," ","38.7801"," -7.415117" );
                     }
-                    if (dbHelper.getPlacebyName("Museu do Marmorre").isEmpty()) {
+                    if (dbHelper.getPlacebyName("Museu do Marmore").isEmpty()) {
                         dbHelper.insertPlace("Entretenimento", "Museu do Marmore", "O magnífico mármore Português chega a todo o Mundo, oriundo das pedreiras de Vila Viçosa, Borba e Estremoz. A sua qualidade superior permite a exploração desde o período romano."
                                 + "\n" + "Tendo como grande desígnio a promoção do Mármore Português e a percepção sobre os processos de extracção e transformação desta rocha ornamental de Qualidade, o Museu do Mármore de Vila Viçosa abriu as suas portas em Outubro de 2000 na antiga estação de comboios desta Vila.\n" +
                                         " \n" +
                                         "Recentemente, o Museu foi instalado na Pedreira da Gradinha, junto à saída para Borba.",
-                                " 09:30","18:00 "," "," ","38.786584"," -7.424383" );
+                                " 09:30","18:00", "", "", "38.786584", "-7.424383");
                     }
                     if (dbHelper.getPlacebyName("Igreja São Bartolomeu").isEmpty()) {
                         dbHelper.insertPlace("Monumentos", "Igreja São Bartolomeu", "Na Praça da República ergue-se este templo seiscentista, também conhecido como Igreja do Colégio ou de São Bartolomeu, edificado por ordem dos Duques de Bragança (1636), para acolher o colégio jesuíta de São João Evangelista, fundado anos antes, em 1601." +
@@ -71,7 +71,7 @@ public class LoadingScreen extends AppCompatActivity {
                                         "Flanqueada por duas torres sineiras quadrangulares, conta ainda na fachada com o relógio ali colocado em 1822 pela autarquia.\n" +
                                         "\n" +
                                         "No seu interior, o templo é um exemplar clássico da arquitectura barroca, destacando-se o retábulo do altar-mor feito em talha dourada pelo calipolense Bartolomeu Gomes em 1726.",
-                                " "," "," "," ","38.778113"," -7.419300" );
+                                "", "", "", "","38.778113"," -7.419300" );
                     }
                     else{
                         Log.d("Conhecer Vila Viçosa", "Default Points not working");
