@@ -2,14 +2,11 @@ package com.example.fbiomateus.conhecer_vilavicosa;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +19,6 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
@@ -60,15 +56,11 @@ public class Description extends AppCompatActivity implements GoogleApiClient.Co
         final ImageView imgPlace = (ImageView) findViewById(R.id.imgPlace);
         Picasso.with(getApplicationContext()).load(intent.getStringExtra("imgUrl")).into(imgPlace);
 
-
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-
 
         btnDirection.setText(intent.getStringExtra("name"));
         txtDescription.setText(intent.getStringExtra("description"));
@@ -78,9 +70,6 @@ public class Description extends AppCompatActivity implements GoogleApiClient.Co
         lng = Double.valueOf(intent.getStringExtra("longitude"));
 
         pointLatLng = new LatLng(lat,lng);
-
-
-
 
         this.btnDirection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,10 +87,6 @@ public class Description extends AppCompatActivity implements GoogleApiClient.Co
         compareLocation();
 
     }
-
-
-
-
 
     private void findViews() {
         this.btnDirection = (Button) findViewById(R.id.btnDirection);
@@ -133,13 +118,13 @@ public class Description extends AppCompatActivity implements GoogleApiClient.Co
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
+            Log.d("ADASDASDSAD", "WORKING");
         }
         else{
             Log.d("Conhecer VV","Localizaçao not working");
         }
 
     }
-
 
     protected void compareLocation(){
         if (mLastLocation == null){
@@ -148,12 +133,10 @@ public class Description extends AppCompatActivity implements GoogleApiClient.Co
             LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
             dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
             dist = dist/1000;
-            dist = Double.parseDouble(new DecimalFormat("###.##").format(dist));
-            txtDistance.setText(String.valueOf(+ dist +" KM"));
+            DecimalFormat df = new DecimalFormat("0.##");
+            txtDistance.setText(String.valueOf(df.format(dist)) + " km");
         }
     }
-
-
 
     @Override
     protected void onResume(){
