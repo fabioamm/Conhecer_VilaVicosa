@@ -21,12 +21,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-//import com.google.maps.android.SphericalUtil;
+//
+import com.google.maps.android.SphericalUtil;
 import com.squareup.picasso.Picasso;
 
 public class Description extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,LocationListener {
 
+    private MapsActivity map;
     private Button btnDirection;
     private TextView txtName, txtDescription,txtHours,txtContact,txtDistance;
    // private ImageView imgPlace;
@@ -43,7 +46,6 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-
 
         Intent intent = getIntent();
         getSupportActionBar().setTitle(intent.getStringExtra("name"));
@@ -136,7 +138,7 @@ public class Description extends AppCompatActivity implements GoogleApiClient.On
             Log.d("Conhecer Vila Viçosa", "currentLocation == null");
         }else{
             LatLng myLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            //dist = SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
+            SphericalUtil.computeDistanceBetween(myLatLng,pointLatLng);
             txtDistance.setText(String.valueOf(dist));
         }
     }
